@@ -1,0 +1,19 @@
+ext {
+    slf4jVersion = '1.7.24'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+
+        testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+        testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.4'
+    }
+}
+
