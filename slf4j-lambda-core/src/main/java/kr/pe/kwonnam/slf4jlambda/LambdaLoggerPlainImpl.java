@@ -265,12 +265,12 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public String getName() {
-        return null;
+        return workingLogger.getName();
     }
 
     @Override
     public boolean isTraceEnabled() {
-        return false;
+        return workingLogger.isTraceEnabled();
     }
 
     @Override
@@ -300,7 +300,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isTraceEnabled(Marker marker) {
-        return false;
+        return workingLogger.isTraceEnabled(marker);
     }
 
     @Override
@@ -330,7 +330,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isDebugEnabled() {
-        return false;
+        return workingLogger.isDebugEnabled();
     }
 
     @Override
@@ -360,7 +360,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isDebugEnabled(Marker marker) {
-        return false;
+        return workingLogger.isDebugEnabled(marker);
     }
 
     @Override
@@ -390,7 +390,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isInfoEnabled() {
-        return false;
+        return workingLogger.isInfoEnabled();
     }
 
     @Override
@@ -420,7 +420,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isInfoEnabled(Marker marker) {
-        return false;
+        return workingLogger.isInfoEnabled(marker);
     }
 
     @Override
@@ -450,7 +450,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isWarnEnabled() {
-        return false;
+        return workingLogger.isWarnEnabled();
     }
 
     @Override
@@ -480,7 +480,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isWarnEnabled(Marker marker) {
-        return false;
+        return workingLogger.isWarnEnabled(marker);
     }
 
     @Override
@@ -510,7 +510,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isErrorEnabled() {
-        return false;
+        return workingLogger.isErrorEnabled();
     }
 
     @Override
@@ -540,7 +540,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
 
     @Override
     public boolean isErrorEnabled(Marker marker) {
-        return false;
+        return workingLogger.isErrorEnabled(marker);
     }
 
     @Override
