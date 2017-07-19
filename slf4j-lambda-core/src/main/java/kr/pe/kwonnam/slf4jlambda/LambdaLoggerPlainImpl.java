@@ -5,11 +5,11 @@ import org.slf4j.Marker;
 
 import java.util.function.Supplier;
 
-public class LambdaLoggerNonLocationAwareImpl implements LambdaLogger {
+public class LambdaLoggerPlainImpl implements LambdaLogger {
     /** Real Slf4j logger instance */
     private Logger workingLogger;
 
-    public LambdaLoggerNonLocationAwareImpl(Logger workingLogger) {
+    public LambdaLoggerPlainImpl(Logger workingLogger) {
         this.workingLogger = workingLogger;
     }
 
