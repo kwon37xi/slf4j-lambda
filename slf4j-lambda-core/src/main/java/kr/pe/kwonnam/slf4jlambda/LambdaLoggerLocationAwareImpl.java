@@ -15,6 +15,10 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
     private LocationAwareLogger workingLogger;
 
     public LambdaLoggerLocationAwareImpl(LocationAwareLogger workingLogger) {
+        if (workingLogger == null) {
+            throw new IllegalArgumentException("workingLogger must not be null.");
+        }
+
         this.workingLogger = workingLogger;
     }
 

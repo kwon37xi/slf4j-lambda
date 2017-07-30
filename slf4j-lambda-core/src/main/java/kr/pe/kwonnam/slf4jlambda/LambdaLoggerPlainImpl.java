@@ -10,6 +10,10 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
     private Logger workingLogger;
 
     public LambdaLoggerPlainImpl(Logger workingLogger) {
+        if (workingLogger == null) {
+            throw new IllegalArgumentException("workingLogger must not be null.");
+        }
+
         this.workingLogger = workingLogger;
     }
 
