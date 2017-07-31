@@ -389,27 +389,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void trace(String msg) {
-
+        if (workingLogger.isTraceEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.TRACE_INT, msg, null, null);
+        }
     }
 
     @Override
     public void trace(String format, Object arg) {
-
+        if (workingLogger.isTraceEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.TRACE_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void trace(String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isTraceEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.TRACE_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void trace(String format, Object... arguments) {
-
+        if (workingLogger.isTraceEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.TRACE_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void trace(String msg, Throwable t) {
-
+        if (workingLogger.isTraceEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.TRACE_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -419,27 +429,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void trace(Marker marker, String msg) {
-
+        if (workingLogger.isTraceEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.TRACE_INT, msg, null, null);
+        }
     }
 
     @Override
     public void trace(Marker marker, String format, Object arg) {
-
+        if (workingLogger.isTraceEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.TRACE_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void trace(Marker marker, String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isTraceEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.TRACE_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
-    public void trace(Marker marker, String format, Object... argArray) {
-
+    public void trace(Marker marker, String format, Object... arguments) {
+        if (workingLogger.isTraceEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.TRACE_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void trace(Marker marker, String msg, Throwable t) {
-
+        if (workingLogger.isTraceEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.TRACE_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -449,27 +469,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void debug(String msg) {
-
+        if (workingLogger.isDebugEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, msg, null, null);
+        }
     }
 
     @Override
     public void debug(String format, Object arg) {
-
+        if (workingLogger.isDebugEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void debug(String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isDebugEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void debug(String format, Object... arguments) {
-
+        if (workingLogger.isDebugEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void debug(String msg, Throwable t) {
-
+        if (workingLogger.isDebugEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -479,27 +509,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void debug(Marker marker, String msg) {
-
+        if (workingLogger.isDebugEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, msg, null, null);
+        }
     }
 
     @Override
     public void debug(Marker marker, String format, Object arg) {
-
+        if (workingLogger.isDebugEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void debug(Marker marker, String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isDebugEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void debug(Marker marker, String format, Object... arguments) {
-
+        if (workingLogger.isDebugEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void debug(Marker marker, String msg, Throwable t) {
-
+        if (workingLogger.isDebugEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -509,27 +549,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void info(String msg) {
-
+        if (workingLogger.isInfoEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, msg, null, null);
+        }
     }
 
     @Override
     public void info(String format, Object arg) {
-
+        if (workingLogger.isInfoEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void info(String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isInfoEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void info(String format, Object... arguments) {
-
+        if (workingLogger.isInfoEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void info(String msg, Throwable t) {
-
+        if (workingLogger.isInfoEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -539,27 +589,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void info(Marker marker, String msg) {
-
+        if (workingLogger.isInfoEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, msg, null, null);
+        }
     }
 
     @Override
     public void info(Marker marker, String format, Object arg) {
-
+        if (workingLogger.isInfoEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void info(Marker marker, String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isInfoEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void info(Marker marker, String format, Object... arguments) {
-
+        if (workingLogger.isInfoEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void info(Marker marker, String msg, Throwable t) {
-
+        if (workingLogger.isInfoEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -569,27 +629,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void warn(String msg) {
-
+        if (workingLogger.isWarnEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.WARN_INT, msg, null, null);
+        }
     }
 
     @Override
     public void warn(String format, Object arg) {
-
-    }
-
-    @Override
-    public void warn(String format, Object... arguments) {
-
+        if (workingLogger.isWarnEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.WARN_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void warn(String format, Object arg1, Object arg2) {
+        if (workingLogger.isWarnEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.WARN_INT, format, new Object[]{arg1, arg2}, null);
+        }
+    }
 
+    @Override
+    public void warn(String format, Object... arguments) {
+        if (workingLogger.isWarnEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.WARN_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void warn(String msg, Throwable t) {
-
+        if (workingLogger.isWarnEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.WARN_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -599,27 +669,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void warn(Marker marker, String msg) {
-
+        if (workingLogger.isWarnEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, msg, null, null);
+        }
     }
 
     @Override
     public void warn(Marker marker, String format, Object arg) {
-
+        if (workingLogger.isWarnEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void warn(Marker marker, String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isWarnEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void warn(Marker marker, String format, Object... arguments) {
-
+        if (workingLogger.isWarnEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void warn(Marker marker, String msg, Throwable t) {
-
+        if (workingLogger.isWarnEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -629,27 +709,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void error(String msg) {
-
+        if (workingLogger.isErrorEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.ERROR_INT, msg, null, null);
+        }
     }
 
     @Override
     public void error(String format, Object arg) {
-
+        if (workingLogger.isErrorEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.ERROR_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void error(String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isErrorEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.ERROR_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void error(String format, Object... arguments) {
-
+        if (workingLogger.isErrorEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.ERROR_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void error(String msg, Throwable t) {
-
+        if (workingLogger.isErrorEnabled()) {
+            workingLogger.log(null, FQCN, LocationAwareLogger.ERROR_INT, msg, null, t);
+        }
     }
 
     @Override
@@ -659,27 +749,37 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
 
     @Override
     public void error(Marker marker, String msg) {
-
+        if (workingLogger.isErrorEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, msg, null, null);
+        }
     }
 
     @Override
     public void error(Marker marker, String format, Object arg) {
-
+        if (workingLogger.isErrorEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, format, new Object[]{arg}, null);
+        }
     }
 
     @Override
     public void error(Marker marker, String format, Object arg1, Object arg2) {
-
+        if (workingLogger.isErrorEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, format, new Object[]{arg1, arg2}, null);
+        }
     }
 
     @Override
     public void error(Marker marker, String format, Object... arguments) {
-
+        if (workingLogger.isErrorEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, format, arguments, null);
+        }
     }
 
     @Override
     public void error(Marker marker, String msg, Throwable t) {
-
+        if (workingLogger.isErrorEnabled(marker)) {
+            workingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, msg, null, t);
+        }
     }
 
     private Object[] argSuppliersToArgs(Supplier<?>[] argSuppliers) {
