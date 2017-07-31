@@ -1,10 +1,11 @@
 package kr.pe.kwonnam.slf4jlambda;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import org.slf4j.Marker;
 import org.slf4j.spi.LocationAwareLogger;
 
 import java.util.function.Supplier;
+
+import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;
 
 public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwareLogger {
     public static final String FQCN = LambdaLoggerLocationAwareImpl.class.getName();
@@ -782,11 +783,4 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
         }
     }
 
-    private Object[] argSuppliersToArgs(Supplier<?>[] argSuppliers) {
-        Object[] args = new Object[argSuppliers.length];
-        for (int i = 0; i < argSuppliers.length; i++) {
-            args[i] = argSuppliers[i].get();
-        }
-        return args;
-    }
 }
