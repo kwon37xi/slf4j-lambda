@@ -1,3 +1,5 @@
 dependencies {
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+
     testCompile group: 'uk.org.lidalia', name: 'slf4j-test', version: '1.2.0'
 }

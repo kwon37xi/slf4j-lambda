@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":slf4j-lambda-core")
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+}
