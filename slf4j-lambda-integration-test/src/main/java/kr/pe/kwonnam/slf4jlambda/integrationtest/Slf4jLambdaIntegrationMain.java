@@ -12,12 +12,12 @@ public class Slf4jLambdaIntegrationMain {
 
         log.trace(() -> "trace message does not show. it's info level.");
         log.debug(() -> "debug message does not show. it's info level.");
-        log.debug(Slf4jLambdaIntegrationMain::createMessage); // does not show,
+        log.debug(() -> createMessage("debug level")); // does not show,
 
         log.info(() -> "info message");
         log.warn(() -> "warn message");
         log.error(() -> "error message");
-        log.info(Slf4jLambdaIntegrationMain::createMessage);
+        log.info(() -> createMessage("info level"));
 
         log.info("lambda formatter number {}, string {}", () -> 123, () -> "Hello LambdaLogger");
         log.info("basic formatter number {}, string {}", 123, "Hello LambdaLogger");
@@ -30,10 +30,10 @@ public class Slf4jLambdaIntegrationMain {
         }
     }
 
-    public static String createMessage() {
-        String message = "message created - " + LocalDateTime.now();
-        System.out.println("### message created - " + message + " ###");
-        return message;
+    public static String createMessage(String message) {
+        final String finalMessage = "### message created - " + message + " - " + LocalDateTime.now() + " ###";
+        System.out.println(finalMessage);
+        return finalMessage;
     }
 
     public static void createEx(String msg) {
