@@ -8,6 +8,14 @@ import java.util.function.Supplier;
 
 public class LambdaLoggerUtils {
 
+    /**
+     * check if log level is enabled in the underlying logger
+     *
+     * @param underlyingLogger real Slf4j Logger implementation
+     * @param logLevel log level
+     * @param marker marker
+     * @return true if log level is enabled or false.
+     */
     public static boolean isLogLevelEnabled(Logger underlyingLogger, Level logLevel, Marker marker) {
         switch (logLevel) {
             case TRACE:
@@ -42,10 +50,21 @@ public class LambdaLoggerUtils {
     }
 
     public static Object[] argSuppliersToArgs(Supplier<?>... argSuppliers) {
+        if (argSuppliers == null) {
+            return null;
+        }
+
         Object[] args = new Object[argSuppliers.length];
         for (int i = 0; i < argSuppliers.length; i++) {
             args[i] = argSuppliers[i].get();
         }
         return args;
+    }
+
+    public static String asStr(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        return String.valueOf(obj);
     }
 }

@@ -2,6 +2,7 @@ package kr.pe.kwonnam.slf4jlambda;
 
 import org.slf4j.Logger;
 import org.slf4j.Marker;
+import org.slf4j.event.Level;
 
 import java.util.function.Supplier;
 
@@ -10,7 +11,9 @@ public interface LambdaLogger extends Logger {
     /**
      * {@link Logger#debug(java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
-    void debug(String format, Supplier<?> argSupplier1);
+    default void debug(String format, Supplier<?> argSupplier1) {
+
+    }
 
     /**
      * {@link Logger#debug(java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
@@ -256,4 +259,11 @@ public interface LambdaLogger extends Logger {
      * {@link Logger#warn(org.slf4j.Marker, java.lang.String, java.lang.Throwable)} with a lambda message supplier.
      */
     void warn(Marker marker, Supplier<?> msgSupplier, Throwable t);
+
+
+    void doLog(Marker marker, Level level, Supplier<?> msgSupplier, Throwable t);
+
+    void doLog(Marker marker, Level level, String format, Supplier<?>[] argSuppliers, Throwable t);
+
+    void doLog(Marker marker, Level level, String format, Object[] arguments, Throwable t);
 }

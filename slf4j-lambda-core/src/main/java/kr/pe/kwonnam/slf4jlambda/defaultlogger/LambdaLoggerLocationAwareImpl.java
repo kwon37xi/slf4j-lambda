@@ -1,13 +1,17 @@
 package kr.pe.kwonnam.slf4jlambda.defaultlogger;
 
 import kr.pe.kwonnam.slf4jlambda.LambdaLogger;
+import kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils;
 import org.slf4j.Marker;
 import org.slf4j.event.Level;
 import org.slf4j.spi.LocationAwareLogger;
 
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.Supplier;
 
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;
+import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.asStr;
+import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.isLogLevelEnabled;
 
 public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
 
@@ -28,72 +32,52 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
 
     @Override
     public void debug(String format, Supplier<?> argSupplier1) {
-        if (underlyingLogger.isDebugEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSupplier1), null);
-        }
+        doLog(null, Level.DEBUG, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     @Override
     public void debug(String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        if (underlyingLogger.isDebugEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSupplier1, argSupplier2), null);
-        }
+        doLog(null, Level.DEBUG, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     @Override
     public void debug(String format, Supplier<?>... argSuppliers) {
-        if (underlyingLogger.isDebugEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSuppliers), null);
-        }
+        doLog(null, Level.DEBUG, format, argSuppliers, null);
     }
 
     @Override
     public void debug(Supplier<?> msgSupplier) {
-        if (underlyingLogger.isDebugEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(msgSupplier.get()), null, null);
-        }
+        doLog(null, Level.DEBUG, msgSupplier, null);
     }
 
     @Override
     public void debug(Supplier<?> msgSupplier, Throwable t) {
-        if (underlyingLogger.isDebugEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(msgSupplier.get()), null, t);
-        }
+        doLog(null, Level.DEBUG, msgSupplier, t);
     }
 
     @Override
     public void debug(Marker marker, String format, Supplier<?> argSupplier1) {
-        if (underlyingLogger.isDebugEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSupplier1), null);
-        }
+        doLog(marker, Level.DEBUG, format, new Supplier[]{argSupplier1}, null);
     }
 
     @Override
     public void debug(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        if (underlyingLogger.isDebugEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSupplier1, argSupplier2), null);
-        }
+        doLog(marker, Level.DEBUG, format, new Supplier[]{argSupplier1, argSupplier2}, null);
     }
 
     @Override
     public void debug(Marker marker, String format, Supplier<?>... argSuppliers) {
-        if (underlyingLogger.isDebugEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, format, argSuppliersToArgs(argSuppliers), null);
-        }
+        doLog(marker, Level.DEBUG, format, argSuppliers, null);
     }
 
     @Override
     public void debug(Marker marker, Supplier<?> msgSupplier) {
-        if (underlyingLogger.isDebugEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(msgSupplier.get()), null, null);
-        }
+        doLog(marker, Level.DEBUG, msgSupplier, null);
     }
 
     @Override
     public void debug(Marker marker, Supplier<?> msgSupplier, Throwable t) {
-        if (underlyingLogger.isDebugEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.DEBUG_INT, String.valueOf(msgSupplier.get()), null, t);
-        }
+        doLog(marker, Level.DEBUG, msgSupplier, t);
     }
 
     @Override
@@ -168,72 +152,52 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
 
     @Override
     public void info(String format, Supplier<?> argSupplier1) {
-        if (underlyingLogger.isInfoEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSupplier1), null);
-        }
+        doLog(null, Level.INFO, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     @Override
     public void info(String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        if (underlyingLogger.isInfoEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSupplier1, argSupplier2), null);
-        }
+        doLog(null, Level.INFO, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     @Override
     public void info(String format, Supplier<?>[] argSuppliers) {
-        if (underlyingLogger.isInfoEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSuppliers), null);
-        }
+        doLog(null, Level.INFO, format, argSuppliers, null);
     }
 
     @Override
     public void info(Supplier<?> msgSupplier) {
-        if (underlyingLogger.isInfoEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(msgSupplier.get()), null, null);
-        }
+        doLog(null, Level.INFO, msgSupplier, null);
     }
 
     @Override
     public void info(Supplier<?> msgSupplier, Throwable t) {
-        if (underlyingLogger.isInfoEnabled()) {
-            underlyingLogger.log(null, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(msgSupplier.get()), null, t);
-        }
+        doLog(null, Level.INFO, msgSupplier, t);
     }
 
     @Override
     public void info(Marker marker, String format, Supplier<?> argSupplier1) {
-        if (underlyingLogger.isInfoEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSupplier1), null);
-        }
+        doLog(marker, Level.INFO, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     @Override
     public void info(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        if (underlyingLogger.isInfoEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSupplier1, argSupplier2), null);
-        }
+        doLog(marker, Level.INFO, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     @Override
     public void info(Marker marker, String format, Supplier<?>... argSuppliers) {
-        if (underlyingLogger.isInfoEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, format, argSuppliersToArgs(argSuppliers), null);
-        }
+        doLog(marker, Level.INFO, format, argSuppliers, null);
     }
 
     @Override
     public void info(Marker marker, Supplier<?> msgSupplier) {
-        if (underlyingLogger.isInfoEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(msgSupplier.get()), null, null);
-        }
+        doLog(marker, Level.INFO, msgSupplier, null);
     }
 
     @Override
     public void info(Marker marker, Supplier<?> msgSupplier, Throwable t) {
-        if (underlyingLogger.isInfoEnabled(marker)) {
-            underlyingLogger.log(marker, FQCN, LocationAwareLogger.INFO_INT, String.valueOf(msgSupplier.get()), null, t);
-        }
+        doLog(marker, Level.INFO, msgSupplier, t);
     }
 
     @Override
@@ -781,16 +745,25 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
         }
     }
 
-    void log(Marker marker, Level level, Supplier<?> msgSupplier, Supplier<?> argSuppliers, Throwable t) {
-
+    @Override
+    public void doLog(Marker marker, Level level, Supplier<?> msgSupplier, Throwable t) {
+        if (isLogLevelEnabled(underlyingLogger, level, marker)) {
+            underlyingLogger.log(marker, FQCN, level.toInt(), asStr(msgSupplier.get()), null, t);
+        }
     }
 
-    void log(Marker marker, Level level, String format, Supplier<?> argSuppliers, Throwable t) {
-
+    @Override
+    public void doLog(Marker marker, Level level, String format, Supplier<?>[] argSuppliers, Throwable t) {
+        if (isLogLevelEnabled(underlyingLogger, level, marker)) {
+            underlyingLogger.log(marker, FQCN, level.toInt(), format, argSuppliersToArgs(argSuppliers), t);
+        }
     }
 
-    void log(Marker marker, Level level, String format, Object[] arguments, Throwable t) {
-        underlyingLogger.log(marker, FQCN, level.toInt(), format, arguments, t);
+    @Override
+    public void doLog(Marker marker, Level level, String format, Object[] arguments, Throwable t) {
+        if (isLogLevelEnabled(underlyingLogger, level, marker)) {
+            underlyingLogger.log(marker, FQCN, level.toInt(), format, arguments, t);
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package kr.pe.kwonnam.slf4jlambda.defaultlogger;
 import kr.pe.kwonnam.slf4jlambda.LambdaLogger;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
+import org.slf4j.event.Level;
 
 import java.util.function.Supplier;
 
@@ -675,5 +676,20 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
     @Override
     public void error(Marker marker, String msg, Throwable t) {
         underlyingLogger.error(marker, msg, t);
+    }
+
+    @Override
+    public void doLog(Marker marker, Level level, Supplier<?> msgSupplier, Throwable t) {
+
+    }
+
+    @Override
+    public void doLog(Marker marker, Level level, String format, Supplier<?>[] argSuppliers, Throwable t) {
+
+    }
+
+    @Override
+    public void doLog(Marker marker, Level level, String format, Object[] arguments, Throwable t) {
+
     }
 }

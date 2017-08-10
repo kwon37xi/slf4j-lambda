@@ -9,6 +9,9 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.slf4j.event.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
@@ -129,5 +132,23 @@ public class LambdaLoggerUtilsTest {
     @Test(expected = NullPointerException.class)
     public void isLogLevelEnabled_LogLevel_null() throws Exception {
         assertThat(LambdaLoggerUtils.isLogLevelEnabled(underlyingLogger, null, null)).isFalse();
+    }
+
+    @Test
+    public void asStr_null() throws Exception {
+        assertThat(LambdaLoggerUtils.asStr(null)).isNull();
+    }
+
+    @Test
+    public void asStr_not_null() throws Exception {
+        assertThat(LambdaLoggerUtils.asStr("hello world")).isEqualTo("hello world");
+
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+
+        assertThat(LambdaLoggerUtils.asStr(integers)).isEqualTo("[1, 2, 3]");
+
     }
 }
