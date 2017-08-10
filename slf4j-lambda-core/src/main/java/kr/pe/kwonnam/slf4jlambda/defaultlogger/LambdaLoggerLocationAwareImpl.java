@@ -2,13 +2,14 @@ package kr.pe.kwonnam.slf4jlambda.defaultlogger;
 
 import kr.pe.kwonnam.slf4jlambda.LambdaLogger;
 import org.slf4j.Marker;
+import org.slf4j.event.Level;
 import org.slf4j.spi.LocationAwareLogger;
 
 import java.util.function.Supplier;
 
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;
 
-public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwareLogger {
+public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
 
     public static final String FQCN = LambdaLoggerLocationAwareImpl.class.getName();
 
@@ -373,11 +374,6 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
         if (underlyingLogger.isWarnEnabled(marker)) {
             underlyingLogger.log(marker, FQCN, LocationAwareLogger.WARN_INT, String.valueOf(msgSupplier.get()), null, t);
         }
-    }
-
-    @Override
-    public void log(Marker marker, String fqcn, int level, String message, Object[] argArray, Throwable t) {
-        underlyingLogger.log(marker, fqcn, level, message, argArray, t);
     }
 
     @Override
@@ -784,4 +780,17 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwar
             underlyingLogger.log(marker, FQCN, LocationAwareLogger.ERROR_INT, msg, null, t);
         }
     }
+
+    void log(Marker marker, Level level, Supplier<?> msgSupplier, Supplier<?> argSuppliers, Throwable t) {
+
+    }
+
+    void log(Marker marker, Level level, String format, Supplier<?> argSuppliers, Throwable t) {
+
+    }
+
+    void log(Marker marker, Level level, String format, Object[] arguments, Throwable t) {
+        underlyingLogger.log(marker, FQCN, level.toInt(), format, arguments, t);
+    }
+
 }
