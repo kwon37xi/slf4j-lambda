@@ -18,5 +18,5 @@ public class LambdaLoggerLocationAwareImplTest {
         lambdaLogger = new LambdaLoggerLocationAwareImpl(underlyingLogger);
     }
 
-    
+
 }

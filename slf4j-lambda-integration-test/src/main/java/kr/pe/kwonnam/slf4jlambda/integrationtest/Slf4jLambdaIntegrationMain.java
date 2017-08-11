@@ -19,14 +19,14 @@ public class Slf4jLambdaIntegrationMain {
         log.error(() -> "error message");
         log.info(() -> createMessage("info level"));
 
-        log.info("lambda formatter number {}, string {}", () -> 123, () -> "Hello LambdaLogger");
-        log.info("basic formatter number {}, string {}", 123, "Hello LambdaLogger");
+        log.info("info lambda formatter number {}, string {}", () -> 123, () -> "Hello LambdaLogger");
+        log.info("info basic formatter number {}, string {}", 123, "Hello LambdaLogger");
 
         try {
             createEx("Test Exception");
         } catch (Exception ex) {
-            log.error(() -> "lambda exception msg - " + ex.getMessage(), ex);
-            log.error("basic exception msg - " + ex.getMessage(), ex);
+            log.error(() -> "error lambda exception msg - " + ex.getMessage(), ex);
+            log.error("error basic exception msg - " + ex.getMessage(), ex);
         }
     }
 
