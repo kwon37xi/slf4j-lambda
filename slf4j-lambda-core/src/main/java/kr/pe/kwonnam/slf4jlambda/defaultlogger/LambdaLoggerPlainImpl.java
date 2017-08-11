@@ -13,6 +13,11 @@ import java.util.function.Supplier;
 
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;
 
+/**
+ * LambdaLoggerPlainImpl is for slf4j implementation that does not support {@link org.slf4j.spi.LocationAwareLogger}.
+ * <p>
+ * slf4j-simple does not support LocationAwareLogger.
+ */
 public class LambdaLoggerPlainImpl implements LambdaLogger {
     /**
      * Real Slf4j logger instance
@@ -69,9 +74,12 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
             return;
         }
 
-        FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argSuppliersToArgs(argSuppliers), t);
-
-        logFormatted(marker, level, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        if (argSuppliers == null) {
+            logFormatted(marker, level, format, t);
+        } else {
+            FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, argSuppliersToArgs(argSuppliers), t);
+            logFormatted(marker, level, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        }
     }
 
     @Override
@@ -80,8 +88,11 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
             return;
         }
 
-        FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments, t);
-
-        logFormatted(marker, level, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        if (arguments == null) {
+            logFormatted(marker, level, format, t);
+        } else {
+            FormattingTuple formattingTuple = MessageFormatter.arrayFormat(format, arguments, t);
+            logFormatted(marker, level, formattingTuple.getMessage(), formattingTuple.getThrowable());
+        }
     }
 }

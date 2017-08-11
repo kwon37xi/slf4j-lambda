@@ -5,10 +5,10 @@ import kr.pe.kwonnam.slf4jlambda.LambdaLoggerFactory;
 
 import java.time.LocalDateTime;
 
-public class Slf4jLambdaIntegrationMain {
+public class Slf4jLambdaSlf4jSimpleIntegrationMain {
 
     public static void main(String[] args) {
-        LambdaLogger log = LambdaLoggerFactory.getLogger("kr.pe.kwonnam.Slf4jIntegrationTest");
+        LambdaLogger log = LambdaLoggerFactory.getLogger("kr.pe.kwonnam.Slf4jIntegrationTest"); // different from class name on purpose.
 
         log.trace(() -> "trace message does not show. it's info level.");
         log.debug(() -> "debug message does not show. it's info level.");

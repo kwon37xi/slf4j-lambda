@@ -11,6 +11,11 @@ import java.util.function.Supplier;
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.isLogLevelEnabled;
 
+/**
+ * LambdaLoggerLocationAwareImpl is for slf4j implementation that supports {@link org.slf4j.spi.LocationAwareLogger}.
+ *
+ * Logback supports LocationAwareLogger.
+ */
 public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
 
     public static final String FQCN = LambdaLoggerLocationAwareImpl.class.getName();

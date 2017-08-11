@@ -1,0 +1,5 @@
+dependencies {
+    compile project(":slf4j-lambda-core")
+    compile "org.slf4j:slf4j-simple:${slf4jVersion}"
+
+}
