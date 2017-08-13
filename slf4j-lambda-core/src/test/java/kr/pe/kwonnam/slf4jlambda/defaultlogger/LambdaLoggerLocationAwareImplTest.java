@@ -1,6 +1,7 @@
 package kr.pe.kwonnam.slf4jlambda.defaultlogger;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,10 +15,12 @@ import java.util.function.Supplier;
 
 import static kr.pe.kwonnam.slf4jlambda.defaultlogger.LambdaLoggerLocationAwareImpl.FQCN;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LambdaLoggerLocationAwareImplTest {
+
     @Mock
     private LocationAwareLogger underlyingLogger;
 
@@ -30,6 +33,16 @@ public class LambdaLoggerLocationAwareImplTest {
     @Before
     public void setUp() throws Exception {
         lambdaLogger = new LambdaLoggerLocationAwareImpl(underlyingLogger);
+    }
+
+    @Test
+    public void constructor_argument_null() throws Exception {
+        try {
+            new LambdaLoggerLocationAwareImpl(null);
+            failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ex) {
+            assertThat(ex.getMessage()).isEqualTo("underlyingLogger must not be null.");
+        }
     }
 
     @Test
@@ -57,21 +70,37 @@ public class LambdaLoggerLocationAwareImplTest {
 
     @Test
     public void doLog_format_argSuppliers_disabled() throws Exception {
-        when(underlyingLogger.isDebugEnabled(testMarker)).thenReturn(false);
+        when(underlyingLogger.isInfoEnabled(testMarker)).thenReturn(false);
 
-        lambdaLogger.doLog(testMarker, Level.DEBUG, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
+        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
 
-        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.DEBUG.toInt()), eq("message format"), any(Object[].class), eq(testException));
+        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.INFO.toInt()), eq("message format"), any(Object[].class), eq(testException));
     }
 
     @Test
     public void doLog_format_argSuppliers_enabled() throws Exception {
-        when(underlyingLogger.isDebugEnabled(testMarker)).thenReturn(true);
+        when(underlyingLogger.isInfoEnabled(testMarker)).thenReturn(true);
 
-        lambdaLogger.doLog(testMarker, Level.DEBUG, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
+        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
 
-        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.DEBUG.toInt(), "hello world!", null, testException);
+        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.INFO.toInt(), "message format", new Object[]{"hello", "world"}, testException);
     }
 
+    @Test
+    public void goLog_format_arguments_disabled() throws Exception {
+        when(underlyingLogger.isWarnEnabled(testMarker)).thenReturn(false);
 
+        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[]{"arg1", "arg2"}, testException);
+
+        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.WARN.toInt()), eq("message format"), any(Object[].class), eq(testException));
+    }
+
+    @Test
+    public void goLog_format_arguments_enabled() throws Exception {
+        when(underlyingLogger.isWarnEnabled(testMarker)).thenReturn(true);
+
+        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[]{"arg1", "arg2"}, testException);
+
+        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.WARN.toInt(), "message format", new Object[]{"arg1", "arg2"}, testException);
+    }
 }
