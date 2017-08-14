@@ -83,7 +83,7 @@ public interface LambdaLogger extends Logger {
     }
 
     default void debug(String msg, Throwable t) {
-        doLog(null, Level.DEBUG, msg, null, null);
+        doLog(null, Level.DEBUG, msg, null, t);
     }
 
     default boolean isDebugEnabled(Marker marker) {
@@ -253,7 +253,6 @@ public interface LambdaLogger extends Logger {
     default void error(Marker marker, String msg, Throwable t) {
         doLog(marker, Level.ERROR, msg, null, t);
     }
-
 
     /**
      * {@link #trace(java.lang.String, java.lang.Object)} with a lambda argument supplier.
