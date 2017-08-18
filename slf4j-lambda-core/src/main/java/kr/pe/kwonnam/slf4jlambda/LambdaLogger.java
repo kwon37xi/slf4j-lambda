@@ -293,21 +293,21 @@ public interface LambdaLogger extends Logger {
      * {@link #trace(org.slf4j.Marker, java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
     default void trace(Marker marker, String format, Supplier<?> argSupplier1) {
-        doLog(null, Level.TRACE, format, new Supplier<?>[]{argSupplier1}, null);
+        doLog(marker, Level.TRACE, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     /**
      * {@link #trace(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
      */
     default void trace(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        doLog(null, Level.TRACE, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
+        doLog(marker, Level.TRACE, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     /**
      * {@link #trace(org.slf4j.Marker, java.lang.String, java.lang.Object...)} with 3 or more lambda argument suppliers.
      */
     default void trace(Marker marker, String format, Supplier<?>... argSuppliers) {
-        doLog(null, Level.TRACE, format, argSuppliers, null);
+        doLog(marker, Level.TRACE, format, argSuppliers, null);
     }
 
     /**
@@ -363,21 +363,21 @@ public interface LambdaLogger extends Logger {
      * {@link #debug(org.slf4j.Marker, java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
     default void debug(Marker marker, String format, Supplier<?> argSupplier1) {
-        doLog(null, Level.DEBUG, format, new Supplier<?>[]{argSupplier1}, null);
+        doLog(marker, Level.DEBUG, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     /**
      * {@link #debug(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
      */
     default void debug(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        doLog(null, Level.DEBUG, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
+        doLog(marker, Level.DEBUG, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     /**
      * {@link #debug(org.slf4j.Marker, java.lang.String, java.lang.Object...)} with 3 or more lambda argument suppliers.
      */
     default void debug(Marker marker, String format, Supplier<?>... argSuppliers) {
-        doLog(null, Level.DEBUG, format, argSuppliers, null);
+        doLog(marker, Level.DEBUG, format, argSuppliers, null);
     }
 
     /**
@@ -434,21 +434,21 @@ public interface LambdaLogger extends Logger {
      * {@link #info(org.slf4j.Marker, java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
     default void info(Marker marker, String format, Supplier<?> argSupplier1) {
-        doLog(null, Level.INFO, format, new Supplier<?>[]{argSupplier1}, null);
+        doLog(marker, Level.INFO, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     /**
      * {@link #info(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
      */
     default void info(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        doLog(null, Level.INFO, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
+        doLog(marker, Level.INFO, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     /**
      * {@link #info(org.slf4j.Marker, java.lang.String, java.lang.Object...)} with 3 or more lambda argument suppliers.
      */
     default void info(Marker marker, String format, Supplier<?>... argSuppliers) {
-        doLog(null, Level.INFO, format, argSuppliers, null);
+        doLog(marker, Level.INFO, format, argSuppliers, null);
     }
 
     /**
@@ -464,7 +464,6 @@ public interface LambdaLogger extends Logger {
     default void info(Marker marker, Supplier<String> msgSupplier, Throwable t) {
         doLog(marker, Level.INFO, msgSupplier, t);
     }
-
 
     /**
      * {@link #warn(java.lang.String, java.lang.Object)} with a lambda argument supplier.
@@ -505,21 +504,21 @@ public interface LambdaLogger extends Logger {
      * {@link #warn(org.slf4j.Marker, java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
     default void warn(Marker marker, String format, Supplier<?> argSupplier1) {
-        doLog(null, Level.WARN, format, new Supplier<?>[]{argSupplier1}, null);
+        doLog(marker, Level.WARN, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     /**
      * {@link #warn(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
      */
     default void warn(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        doLog(null, Level.WARN, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
+        doLog(marker, Level.WARN, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     /**
      * {@link #warn(org.slf4j.Marker, java.lang.String, java.lang.Object...)} with 3 or more lambda argument suppliers.
      */
     default void warn(Marker marker, String format, Supplier<?>... argSuppliers) {
-        doLog(null, Level.WARN, format, argSuppliers, null);
+        doLog(marker, Level.WARN, format, argSuppliers, null);
     }
 
     /**
@@ -535,7 +534,6 @@ public interface LambdaLogger extends Logger {
     default void warn(Marker marker, Supplier<String> msgSupplier, Throwable t) {
         doLog(marker, Level.WARN, msgSupplier, t);
     }
-
 
     /**
      * {@link #error(java.lang.String, java.lang.Object)} with a lambda argument supplier.
@@ -576,21 +574,21 @@ public interface LambdaLogger extends Logger {
      * {@link #error(org.slf4j.Marker, java.lang.String, java.lang.Object)} with a lambda argument supplier.
      */
     default void error(Marker marker, String format, Supplier<?> argSupplier1) {
-        doLog(null, Level.ERROR, format, new Supplier<?>[]{argSupplier1}, null);
+        doLog(marker, Level.ERROR, format, new Supplier<?>[]{argSupplier1}, null);
     }
 
     /**
      * {@link #error(org.slf4j.Marker, java.lang.String, java.lang.Object, java.lang.Object)} with two lambda argument suppliers.
      */
     default void error(Marker marker, String format, Supplier<?> argSupplier1, Supplier<?> argSupplier2) {
-        doLog(null, Level.ERROR, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
+        doLog(marker, Level.ERROR, format, new Supplier<?>[]{argSupplier1, argSupplier2}, null);
     }
 
     /**
      * {@link #error(org.slf4j.Marker, java.lang.String, java.lang.Object...)} with 3 or more lambda argument suppliers.
      */
     default void error(Marker marker, String format, Supplier<?>... argSuppliers) {
-        doLog(null, Level.ERROR, format, argSuppliers, null);
+        doLog(marker, Level.ERROR, format, argSuppliers, null);
     }
 
     /**

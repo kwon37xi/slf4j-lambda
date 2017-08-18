@@ -3,6 +3,8 @@ package kr.pe.kwonnam.slf4jlambda;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -14,6 +16,7 @@ import org.slf4j.event.Level;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -22,6 +25,12 @@ public class LambdaLoggerTest {
 
     @Mock
     private Logger underlyingLogger;
+
+    @Captor
+    private ArgumentCaptor<Supplier<?>[]> argSuppliersCaptor;
+
+    @Captor
+    private ArgumentCaptor<Supplier<String>> msgSupplierCaptor;
 
     private LambdaLoggerTestImpl lambdaLogger;
 
@@ -59,21 +68,21 @@ public class LambdaLoggerTest {
     public void trace_format_arg() throws Exception {
         lambdaLogger.trace("trace format {}", "arg 1");
 
-        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[] { "arg 1" }, null);
+        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[]{"arg 1"}, null);
     }
 
     @Test
     public void trace_format_arg1_arg2() throws Exception {
         lambdaLogger.trace("trace format {}", "arg 1", "arg 2");
 
-        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[] { "arg 1", "arg 2" }, null);
+        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[]{"arg 1", "arg 2"}, null);
     }
 
     @Test
     public void trace_format_arguments() throws Exception {
         lambdaLogger.trace("trace format {}", "arg 1", "arg 2", "arg three");
 
-        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[] { "arg 1", "arg 2", "arg three" }, null);
+        verify(lambdaLogger).doLog(null, Level.TRACE, "trace format {}", new Object[]{"arg 1", "arg 2", "arg three"}, null);
     }
 
     @Test
@@ -101,21 +110,21 @@ public class LambdaLoggerTest {
     public void trace_marker_format_arg() throws Exception {
         lambdaLogger.trace(testMarker, "trace format {}", "arg");
 
-        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}", new Object[] { "arg" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}", new Object[]{"arg"}, null);
     }
 
     @Test
     public void trace_marker_format_arg1_arg2() throws Exception {
         lambdaLogger.trace(testMarker, "trace format {}, {}", "arg1", "arg2");
 
-        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}, {}", new Object[] { "arg1", "arg2" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}, {}", new Object[]{"arg1", "arg2"}, null);
     }
 
     @Test
     public void trace_marker_format_arguments() throws Exception {
         lambdaLogger.trace(testMarker, "trace format {}, {}", "arg1", "arg2", "arg three");
 
-        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}, {}", new Object[] { "arg1", "arg2", "arg three" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.TRACE, "trace format {}, {}", new Object[]{"arg1", "arg2", "arg three"}, null);
     }
 
     @Test
@@ -143,21 +152,21 @@ public class LambdaLoggerTest {
     public void debug_format_arg() throws Exception {
         lambdaLogger.debug("debug format {}", "arg 1");
 
-        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[] { "arg 1" }, null);
+        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[]{"arg 1"}, null);
     }
 
     @Test
     public void debug_format_arg1_arg2() throws Exception {
         lambdaLogger.debug("debug format {}", "arg 1", "arg 2");
 
-        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[] { "arg 1", "arg 2" }, null);
+        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[]{"arg 1", "arg 2"}, null);
     }
 
     @Test
     public void debug_format_arguments() throws Exception {
         lambdaLogger.debug("debug format {}", "arg 1", "arg 2", "arg three");
 
-        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[] { "arg 1", "arg 2", "arg three" }, null);
+        verify(lambdaLogger).doLog(null, Level.DEBUG, "debug format {}", new Object[]{"arg 1", "arg 2", "arg three"}, null);
     }
 
     @Test
@@ -185,21 +194,21 @@ public class LambdaLoggerTest {
     public void debug_marker_format_arg() throws Exception {
         lambdaLogger.debug(testMarker, "debug format {}", "arg");
 
-        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}", new Object[] { "arg" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}", new Object[]{"arg"}, null);
     }
 
     @Test
     public void debug_marker_format_arg1_arg2() throws Exception {
         lambdaLogger.debug(testMarker, "debug format {}, {}", "arg1", "arg2");
 
-        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}, {}", new Object[] { "arg1", "arg2" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}, {}", new Object[]{"arg1", "arg2"}, null);
     }
 
     @Test
     public void debug_marker_format_arguments() throws Exception {
         lambdaLogger.debug(testMarker, "debug format {}, {}", "arg1", "arg2", "arg three");
 
-        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}, {}", new Object[] { "arg1", "arg2", "arg three" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.DEBUG, "debug format {}, {}", new Object[]{"arg1", "arg2", "arg three"}, null);
     }
 
     @Test
@@ -227,21 +236,21 @@ public class LambdaLoggerTest {
     public void info_format_arg() throws Exception {
         lambdaLogger.info("info format {}", "arg 1");
 
-        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[] { "arg 1" }, null);
+        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[]{"arg 1"}, null);
     }
 
     @Test
     public void info_format_arg1_arg2() throws Exception {
         lambdaLogger.info("info format {}", "arg 1", "arg 2");
 
-        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[] { "arg 1", "arg 2" }, null);
+        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[]{"arg 1", "arg 2"}, null);
     }
 
     @Test
     public void info_format_arguments() throws Exception {
         lambdaLogger.info("info format {}", "arg 1", "arg 2", "arg three");
 
-        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[] { "arg 1", "arg 2", "arg three" }, null);
+        verify(lambdaLogger).doLog(null, Level.INFO, "info format {}", new Object[]{"arg 1", "arg 2", "arg three"}, null);
     }
 
     @Test
@@ -269,21 +278,21 @@ public class LambdaLoggerTest {
     public void info_marker_format_arg() throws Exception {
         lambdaLogger.info(testMarker, "info format {}", "arg");
 
-        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}", new Object[] { "arg" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}", new Object[]{"arg"}, null);
     }
 
     @Test
     public void info_marker_format_arg1_arg2() throws Exception {
         lambdaLogger.info(testMarker, "info format {}, {}", "arg1", "arg2");
 
-        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}, {}", new Object[] { "arg1", "arg2" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}, {}", new Object[]{"arg1", "arg2"}, null);
     }
 
     @Test
     public void info_marker_format_arguments() throws Exception {
         lambdaLogger.info(testMarker, "info format {}, {}", "arg1", "arg2", "arg three");
 
-        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}, {}", new Object[] { "arg1", "arg2", "arg three" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.INFO, "info format {}, {}", new Object[]{"arg1", "arg2", "arg three"}, null);
     }
 
     @Test
@@ -311,21 +320,21 @@ public class LambdaLoggerTest {
     public void warn_format_arg() throws Exception {
         lambdaLogger.warn("warn format {}", "arg 1");
 
-        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[] { "arg 1" }, null);
+        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[]{"arg 1"}, null);
     }
 
     @Test
     public void warn_format_arg1_arg2() throws Exception {
         lambdaLogger.warn("warn format {}", "arg 1", "arg 2");
 
-        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[] { "arg 1", "arg 2" }, null);
+        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[]{"arg 1", "arg 2"}, null);
     }
 
     @Test
     public void warn_format_arguments() throws Exception {
         lambdaLogger.warn("warn format {}", "arg 1", "arg 2", "arg three");
 
-        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[] { "arg 1", "arg 2", "arg three" }, null);
+        verify(lambdaLogger).doLog(null, Level.WARN, "warn format {}", new Object[]{"arg 1", "arg 2", "arg three"}, null);
     }
 
     @Test
@@ -353,21 +362,21 @@ public class LambdaLoggerTest {
     public void warn_marker_format_arg() throws Exception {
         lambdaLogger.warn(testMarker, "warn format {}", "arg");
 
-        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}", new Object[] { "arg" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}", new Object[]{"arg"}, null);
     }
 
     @Test
     public void warn_marker_format_arg1_arg2() throws Exception {
         lambdaLogger.warn(testMarker, "warn format {}, {}", "arg1", "arg2");
 
-        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}, {}", new Object[] { "arg1", "arg2" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}, {}", new Object[]{"arg1", "arg2"}, null);
     }
 
     @Test
     public void warn_marker_format_arguments() throws Exception {
         lambdaLogger.warn(testMarker, "warn format {}, {}", "arg1", "arg2", "arg three");
 
-        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}, {}", new Object[] { "arg1", "arg2", "arg three" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.WARN, "warn format {}, {}", new Object[]{"arg1", "arg2", "arg three"}, null);
     }
 
     @Test
@@ -395,21 +404,21 @@ public class LambdaLoggerTest {
     public void error_format_arg() throws Exception {
         lambdaLogger.error("error format {}", "arg 1");
 
-        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[] { "arg 1" }, null);
+        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[]{"arg 1"}, null);
     }
 
     @Test
     public void error_format_arg1_arg2() throws Exception {
         lambdaLogger.error("error format {}", "arg 1", "arg 2");
 
-        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[] { "arg 1", "arg 2" }, null);
+        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[]{"arg 1", "arg 2"}, null);
     }
 
     @Test
     public void error_format_arguments() throws Exception {
         lambdaLogger.error("error format {}", "arg 1", "arg 2", "arg three");
 
-        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[] { "arg 1", "arg 2", "arg three" }, null);
+        verify(lambdaLogger).doLog(null, Level.ERROR, "error format {}", new Object[]{"arg 1", "arg 2", "arg three"}, null);
     }
 
     @Test
@@ -437,21 +446,21 @@ public class LambdaLoggerTest {
     public void error_marker_format_arg() throws Exception {
         lambdaLogger.error(testMarker, "error format {}", "arg");
 
-        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}", new Object[] { "arg" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}", new Object[]{"arg"}, null);
     }
 
     @Test
     public void error_marker_format_arg1_arg2() throws Exception {
         lambdaLogger.error(testMarker, "error format {}, {}", "arg1", "arg2");
 
-        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}, {}", new Object[] { "arg1", "arg2" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}, {}", new Object[]{"arg1", "arg2"}, null);
     }
 
     @Test
     public void error_marker_format_arguments() throws Exception {
         lambdaLogger.error(testMarker, "error format {}, {}", "arg1", "arg2", "arg three");
 
-        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}, {}", new Object[] { "arg1", "arg2", "arg three" }, null);
+        verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error format {}, {}", new Object[]{"arg1", "arg2", "arg three"}, null);
     }
 
     @Test
@@ -459,6 +468,555 @@ public class LambdaLoggerTest {
         lambdaLogger.error(testMarker, "error message", testException);
 
         verify(lambdaLogger).doLog(testMarker, Level.ERROR, "error message", null, testException);
+    }
+
+    @Test
+    public void trace_format_argSupplier1() throws Exception {
+        lambdaLogger.trace("trace format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void trace_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.trace("trace format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void trace_format_argSuppliers() throws Exception {
+        lambdaLogger.trace("trace format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void trace_msgSupplier() throws Exception {
+        lambdaLogger.trace(() -> "trace message sup");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.TRACE), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("trace message sup");
+    }
+
+    @Test
+    public void trace_msgSupplier_throwable() throws Exception {
+        lambdaLogger.trace(() -> "trace message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.TRACE), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("trace message sup");
+    }
+
+
+    @Test
+    public void trace_marker_format_argSupplier1() throws Exception {
+        lambdaLogger.trace(testMarker, "trace format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void trace_marker_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.trace(testMarker, "trace format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void trace_marker_format_argSuppliers() throws Exception {
+        lambdaLogger.trace(testMarker, "trace format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.TRACE), eq("trace format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void trace_marker_msgSupplier() throws Exception {
+        lambdaLogger.trace(testMarker, () -> "trace message sup");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.TRACE), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("trace message sup");
+    }
+
+    @Test
+    public void trace_marker_msgSupplier_throwable() throws Exception {
+        lambdaLogger.trace(testMarker, () -> "trace message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.TRACE), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("trace message sup");
+    }
+
+
+    @Test
+    public void debug_format_argSupplier1() throws Exception {
+        lambdaLogger.debug("debug format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void debug_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.debug("debug format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void debug_format_argSuppliers() throws Exception {
+        lambdaLogger.debug("debug format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void debug_msgSupplier() throws Exception {
+        lambdaLogger.debug(() -> "debug message sup");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.DEBUG), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("debug message sup");
+    }
+
+    @Test
+    public void debug_msgSupplier_throwable() throws Exception {
+        lambdaLogger.debug(() -> "debug message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.DEBUG), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("debug message sup");
+    }
+
+
+    @Test
+    public void debug_marker_format_argSupplier1() throws Exception {
+        lambdaLogger.debug(testMarker, "debug format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void debug_marker_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.debug(testMarker, "debug format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void debug_marker_format_argSuppliers() throws Exception {
+        lambdaLogger.debug(testMarker, "debug format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.DEBUG), eq("debug format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void debug_marker_msgSupplier() throws Exception {
+        lambdaLogger.debug(testMarker, () -> "debug message sup");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.DEBUG), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("debug message sup");
+    }
+
+    @Test
+    public void debug_marker_msgSupplier_throwable() throws Exception {
+        lambdaLogger.debug(testMarker, () -> "debug message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.DEBUG), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("debug message sup");
+    }
+
+
+    @Test
+    public void info_format_argSupplier1() throws Exception {
+        lambdaLogger.info("info format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void info_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.info("info format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void info_format_argSuppliers() throws Exception {
+        lambdaLogger.info("info format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void info_msgSupplier() throws Exception {
+        lambdaLogger.info(() -> "info message sup");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.INFO), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("info message sup");
+    }
+
+    @Test
+    public void info_msgSupplier_throwable() throws Exception {
+        lambdaLogger.info(() -> "info message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.INFO), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("info message sup");
+    }
+
+
+    @Test
+    public void info_marker_format_argSupplier1() throws Exception {
+        lambdaLogger.info(testMarker, "info format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void info_marker_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.info(testMarker, "info format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void info_marker_format_argSuppliers() throws Exception {
+        lambdaLogger.info(testMarker, "info format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.INFO), eq("info format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void info_marker_msgSupplier() throws Exception {
+        lambdaLogger.info(testMarker, () -> "info message sup");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.INFO), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("info message sup");
+    }
+
+    @Test
+    public void info_marker_msgSupplier_throwable() throws Exception {
+        lambdaLogger.info(testMarker, () -> "info message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.INFO), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("info message sup");
+    }
+
+
+    @Test
+    public void warn_format_argSupplier1() throws Exception {
+        lambdaLogger.warn("warn format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void warn_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.warn("warn format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void warn_format_argSuppliers() throws Exception {
+        lambdaLogger.warn("warn format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void warn_msgSupplier() throws Exception {
+        lambdaLogger.warn(() -> "warn message sup");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.WARN), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("warn message sup");
+    }
+
+    @Test
+    public void warn_msgSupplier_throwable() throws Exception {
+        lambdaLogger.warn(() -> "warn message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.WARN), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("warn message sup");
+    }
+
+
+    @Test
+    public void warn_marker_format_argSupplier1() throws Exception {
+        lambdaLogger.warn(testMarker, "warn format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void warn_marker_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.warn(testMarker, "warn format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void warn_marker_format_argSuppliers() throws Exception {
+        lambdaLogger.warn(testMarker, "warn format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.WARN), eq("warn format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void warn_marker_msgSupplier() throws Exception {
+        lambdaLogger.warn(testMarker, () -> "warn message sup");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.WARN), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("warn message sup");
+    }
+
+    @Test
+    public void warn_marker_msgSupplier_throwable() throws Exception {
+        lambdaLogger.warn(testMarker, () -> "warn message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.WARN), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("warn message sup");
+    }
+
+
+    @Test
+    public void error_format_argSupplier1() throws Exception {
+        lambdaLogger.error("error format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void error_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.error("error format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void error_format_argSuppliers() throws Exception {
+        lambdaLogger.error("error format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void error_msgSupplier() throws Exception {
+        lambdaLogger.error(() -> "error message sup");
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.ERROR), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("error message sup");
+    }
+
+    @Test
+    public void error_msgSupplier_throwable() throws Exception {
+        lambdaLogger.error(() -> "error message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(null), eq(Level.ERROR), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("error message sup");
+    }
+
+
+    @Test
+    public void error_marker_format_argSupplier1() throws Exception {
+        lambdaLogger.error(testMarker, "error format", () -> "arg1");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(1);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+    }
+
+    @Test
+    public void error_marker_format_argSupplier1_argSupplier2() throws Exception {
+        lambdaLogger.error(testMarker, "error format", () -> "arg1", () -> "arg2");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(2);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+    }
+
+    @Test
+    public void error_marker_format_argSuppliers() throws Exception {
+        lambdaLogger.error(testMarker, "error format", () -> "arg1", () -> "arg2", () -> "arg three");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.ERROR), eq("error format"), argSuppliersCaptor.capture(), eq(null));
+
+        Supplier[] suppliers = argSuppliersCaptor.getValue();
+        assertThat(suppliers.length).isEqualTo(3);
+        assertThat(suppliers[0].get()).isEqualTo("arg1");
+        assertThat(suppliers[1].get()).isEqualTo("arg2");
+        assertThat(suppliers[2].get()).isEqualTo("arg three");
+    }
+
+    @Test
+    public void error_marker_msgSupplier() throws Exception {
+        lambdaLogger.error(testMarker, () -> "error message sup");
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.ERROR), msgSupplierCaptor.capture(), eq(null));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("error message sup");
+    }
+
+    @Test
+    public void error_marker_msgSupplier_throwable() throws Exception {
+        lambdaLogger.error(testMarker, () -> "error message sup", testException);
+
+        verify(lambdaLogger).doLog(eq(testMarker), eq(Level.ERROR), msgSupplierCaptor.capture(), eq(testException));
+
+        assertThat(msgSupplierCaptor.getValue().get()).isEqualTo("error message sup");
     }
 
     public static class LambdaLoggerTestImpl implements LambdaLogger {

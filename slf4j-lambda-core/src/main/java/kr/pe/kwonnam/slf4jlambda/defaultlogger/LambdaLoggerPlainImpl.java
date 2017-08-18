@@ -64,6 +64,7 @@ public class LambdaLoggerPlainImpl implements LambdaLogger {
                 underlyingLogger.error(marker, msg, t);
                 break;
             default:
+                System.err.println("Log Level level " + level + " is unknown.");
                 return;
         }
     }
