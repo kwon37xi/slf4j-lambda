@@ -5,6 +5,8 @@ ext {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'pmd'
+    apply plugin: 'findbugs'
 
     repositories {
         mavenCentral()
@@ -23,6 +25,21 @@ subprojects {
         testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 
         testCompile 'org.assertj:assertj-core:3.8.0'
+    }
+
+    tasks.withType(Pmd) {
+        ignoreFailures = true
+
+        reports {
+            html.enabled true
+        }
+    }
+
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled false
+            html.enabled true
+        }
     }
 }
 

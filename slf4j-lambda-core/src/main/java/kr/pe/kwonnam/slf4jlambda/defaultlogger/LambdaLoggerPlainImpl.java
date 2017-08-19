@@ -8,7 +8,6 @@ import org.slf4j.event.Level;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 
-import java.text.MessageFormat;
 import java.util.function.Supplier;
 
 import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.argSuppliersToArgs;

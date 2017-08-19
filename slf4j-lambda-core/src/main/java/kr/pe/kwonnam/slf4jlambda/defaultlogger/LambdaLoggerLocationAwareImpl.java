@@ -16,9 +16,10 @@ import static kr.pe.kwonnam.slf4jlambda.LambdaLoggerUtils.isLogLevelEnabled;
  *
  * Logback supports LocationAwareLogger.
  */
-public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
+public class LambdaLoggerLocationAwareImpl implements LambdaLogger, LocationAwareLogger {
 
-    public static final String FQCN = LambdaLoggerLocationAwareImpl.class.getName();
+    /** MUST use LambdaLogger's FQCN because LambdaLogger default methods do logs */
+    public static final String FQCN = LambdaLogger.class.getName();
 
     /**
      * Real Slf4j logger instance
@@ -33,6 +34,11 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
         this.underlyingLogger = underlyingLogger;
     }
 
+    /** return logger's fully qualified class name for LocationAwareLogger */
+    protected String getLoggerFQCN() {
+        return FQCN;
+    }
+
     @Override
     public Logger getUnderlyingLogger() {
         return underlyingLogger;
@@ -41,22 +47,26 @@ public class LambdaLoggerLocationAwareImpl implements LambdaLogger {
     @Override
     public void doLog(Marker marker, Level level, Supplier<String> msgSupplier, Throwable t) {
         if (isLogLevelEnabled(underlyingLogger, level, marker)) {
-            underlyingLogger.log(marker, FQCN, level.toInt(), msgSupplier.get(), null, t);
+            underlyingLogger.log(marker, getLoggerFQCN(), level.toInt(), msgSupplier.get(), null, t);
         }
     }
 
     @Override
     public void doLog(Marker marker, Level level, String format, Supplier<?>[] argSuppliers, Throwable t) {
         if (isLogLevelEnabled(underlyingLogger, level, marker)) {
-            underlyingLogger.log(marker, FQCN, level.toInt(), format, argSuppliersToArgs(argSuppliers), t);
+            underlyingLogger.log(marker, getLoggerFQCN(), level.toInt(), format, argSuppliersToArgs(argSuppliers), t);
         }
     }
 
     @Override
     public void doLog(Marker marker, Level level, String format, Object[] arguments, Throwable t) {
         if (isLogLevelEnabled(underlyingLogger, level, marker)) {
-            underlyingLogger.log(marker, FQCN, level.toInt(), format, arguments, t);
+            underlyingLogger.log(marker, getLoggerFQCN(), level.toInt(), format, arguments, t);
         }
     }
 
+    @Override
+    public void log(Marker marker, String fqcn, int level, String message, Object[] arguments, Throwable t) {
+        underlyingLogger.log(marker, fqcn, level, message, arguments, t);
+    }
 }

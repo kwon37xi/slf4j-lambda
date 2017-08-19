@@ -1,7 +1,6 @@
 package kr.pe.kwonnam.slf4jlambda.defaultlogger;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -72,35 +71,46 @@ public class LambdaLoggerLocationAwareImplTest {
     public void doLog_format_argSuppliers_disabled() throws Exception {
         when(underlyingLogger.isInfoEnabled(testMarker)).thenReturn(false);
 
-        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
+        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[] { () -> "hello", () -> "world" }, testException);
 
-        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.INFO.toInt()), eq("message format"), any(Object[].class), eq(testException));
+        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.INFO.toInt()), eq("message format"), any(Object[].class),
+            eq(testException));
     }
 
     @Test
     public void doLog_format_argSuppliers_enabled() throws Exception {
         when(underlyingLogger.isInfoEnabled(testMarker)).thenReturn(true);
 
-        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[]{() -> "hello", () -> "world"}, testException);
+        lambdaLogger.doLog(testMarker, Level.INFO, "message format", new Supplier<?>[] { () -> "hello", () -> "world" }, testException);
 
-        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.INFO.toInt(), "message format", new Object[]{"hello", "world"}, testException);
+        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.INFO.toInt(), "message format", new Object[] { "hello", "world" },
+            testException);
     }
 
     @Test
     public void goLog_format_arguments_disabled() throws Exception {
         when(underlyingLogger.isWarnEnabled(testMarker)).thenReturn(false);
 
-        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[]{"arg1", "arg2"}, testException);
+        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[] { "arg1", "arg2" }, testException);
 
-        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.WARN.toInt()), eq("message format"), any(Object[].class), eq(testException));
+        verify(underlyingLogger, never()).log(eq(testMarker), eq(FQCN), eq(Level.WARN.toInt()), eq("message format"), any(Object[].class),
+            eq(testException));
     }
 
     @Test
     public void goLog_format_arguments_enabled() throws Exception {
         when(underlyingLogger.isWarnEnabled(testMarker)).thenReturn(true);
 
-        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[]{"arg1", "arg2"}, testException);
+        lambdaLogger.doLog(testMarker, Level.WARN, "message format", new Object[] { "arg1", "arg2" }, testException);
 
-        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.WARN.toInt(), "message format", new Object[]{"arg1", "arg2"}, testException);
+        verify(underlyingLogger, times(1)).log(testMarker, FQCN, Level.WARN.toInt(), "message format", new Object[] { "arg1", "arg2" },
+            testException);
+    }
+
+    @Test
+    public void log_location_aware() throws Exception {
+        lambdaLogger.log(testMarker, "FQCN", Level.INFO.toInt(), "log message", new Object[] { "arg1", "arg2" }, testException);
+
+        verify(underlyingLogger, times(1)).log(testMarker, "FQCN", Level.INFO.toInt(), "log message", new Object[] { "arg1", "arg2" }, testException);
     }
 }
