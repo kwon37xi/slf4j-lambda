@@ -8,6 +8,9 @@ subprojects {
     apply plugin: 'pmd'
     apply plugin: 'findbugs'
 
+    group = 'kr.pe.kwonnam.slf4j-lambda'
+    version = '0.1'
+
     repositories {
         mavenCentral()
     }
@@ -39,6 +42,77 @@ subprojects {
         reports {
             xml.enabled false
             html.enabled true
+        }
+    }
+
+    // maven repository upload configuration
+    if (['slf4j-lambda-core'].contains(project.name)) {
+        apply plugin: 'maven'
+        apply plugin: 'signing'
+
+        task javadocJar(type: Jar) {
+            classifier = 'javadoc'
+            from javadoc
+        }
+
+        task sourcesJar(type: Jar) {
+            classifier = 'sources'
+            from sourceSets.main.allSource
+        }
+
+        artifacts {
+            archives javadocJar, sourcesJar
+        }
+
+        if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+            logger.info('Initializing signing and uploadArchives')
+
+            signing {
+                sign configurations.archives
+            }
+
+            uploadArchives {
+                repositories {
+                    mavenDeployer {
+                        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                            authentication(userName: ossrhUsername, password: ossrhPassword)
+                        }
+
+                        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                            authentication(userName: ossrhUsername, password: ossrhPassword)
+                        }
+
+                        pom.project {
+                            name "${project.name}"
+                            packaging 'jar'
+                            description 'slf4j-lambda'
+                            url 'https://github.com/kwon37xi/slf4j-lambda'
+
+                            scm {
+                                connection 'scm:git:https://github.com/kwon37xi/slf4j-lambda.git'
+                                url 'https://github.com/kwon37xi/slf4j-lambda'
+                            }
+
+                            licenses {
+                                license {
+                                    name 'The Apache Software License, Version 2.0'
+                                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id 'kwon37xi'
+                                    name 'KwonNam Son'
+                                    email 'kwon37xi@gmail.com'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
