@@ -17,6 +17,7 @@ include 'services:webservice'
 
 rootProject.name = 'slf4j-lambda'
 include 'slf4j-lambda-core'
+include 'slf4j-lambda-lombok'
 include 'slf4j-lambda-test'
 include 'slf4j-lambda-logback-integration-test'
 include 'slf4j-lambda-slf4jsimple-integration-test'

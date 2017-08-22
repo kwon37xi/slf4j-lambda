@@ -1,0 +1,7 @@
+/*
+  Refer to http://notatube.blogspot.kr/2010/12/project-lombok-creating-custom.html for project configuration.
+*/
+dependencies {
+    compile project(":slf4j-lambda-core")
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+}
