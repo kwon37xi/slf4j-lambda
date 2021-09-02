@@ -12,7 +12,7 @@ The lambda expressions are evaluated only when the log level is enabled.
 ## Dependencies
 ```
 dependencies {
-    compile 'kr.pe.kwonnam.slf4j:slf4j-lambda-core:0.1'
+    implementation 'kr.pe.kwonnam.slf4j-lambda:slf4j-lambda-core:0.1'
 }
 ```
 
